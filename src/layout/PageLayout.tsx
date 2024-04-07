@@ -12,7 +12,7 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
     const [siderOpen, setSiderOpen] = React.useState(false);
     return (
 
-            <Layout>
+            <Layout style={{ minHeight: "100vh" }}>
                 <Header style={{backgroundColor: !props.darkMode ? "#F5F5F5" : "#001529", borderBottom: '1px solid #F0F0F0'}}>
                     <Row wrap={false} justify="space-between" align="middle" style={{ height: "100%" }}>
                         <Col>
@@ -33,7 +33,7 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
                         </Col>
                     </Row>
                 </Header>
-                <Layout hasSider={true} style={{ minHeight: "100vh" }}>
+                <Layout hasSider={true} >
                     <Sider
                         collapsed={!siderOpen}
                         style={{backgroundColor: !props.darkMode ? "#F5F5F5" : "#001529", borderRight: '1px solid #F0F0F0'}}

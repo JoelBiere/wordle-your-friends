@@ -1,21 +1,39 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {Col, Flex, Row} from "antd";
+import Tile from "./components/Tile";
+import axios from "axios";
+import dayjs from "dayjs";
 
 
 const Wordle = (props: any) => {
 
+    const puzzle = "QUEST"
 
+    useEffect(() => {
+
+        const requestUrl = `https://wordle-game-api1.p.rapidapi.com/word`
+
+        axios.post(requestUrl, {
+            headers: {
+                'content-type': 'application/json',
+                'X-RapidAPI-Key': 'bf3dc115dbmshc88e8b30a68ec12p16e92ejsn6ae13e11f16c',
+                'X-RapidAPI-Host': 'wordle-game-api1.p.rapidapi.com'
+            }
+        })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+
+    },[])
     return (
-        <div>
-            {`
-            -------------
-            |           |
-            |           |
-            |           |
-            |           |
-            -------------
-            
-                `}
-        </div>
+        <Flex justify={'center'}>
+            <Row gutter={[8,8]}>
+                {puzzle.split("").map(letter =><Col> <Tile letter={letter} /> </Col>)}
+            </Row>
+        </Flex>
     )
 }
 
