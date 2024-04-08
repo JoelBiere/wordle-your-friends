@@ -1,3 +1,4 @@
+export const words = `
 CIGAR
 REBUT
 SISSY
@@ -3355,3 +3356,4 @@ ROWER
 ARTSY
 RURAL
 SHAVE
+`

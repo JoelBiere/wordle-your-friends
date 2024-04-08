@@ -3,6 +3,7 @@ import {Col, Flex, Row} from "antd";
 import Tile from "./components/Tile";
 import axios from "axios";
 import dayjs from "dayjs";
+import {generateWordleWords} from "../firebase/data-seeder";
 
 
 const Wordle = (props: any) => {
@@ -10,7 +11,8 @@ const Wordle = (props: any) => {
     const puzzle = "QUEST"
 
     useEffect(() => {
-
+        const words = generateWordleWords()
+        console.log(words)
         const requestUrl = `https://wordle-game-api1.p.rapidapi.com/word`
 
         axios.post(requestUrl, {
