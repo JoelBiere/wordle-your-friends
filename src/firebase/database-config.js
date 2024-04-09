@@ -1,3 +1,8 @@
-import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
+import app from "./init";
 
-const database = getDatabase();
+export const db = getFirestore(app);
+
+export const getSomeData = async () => {
+
+};

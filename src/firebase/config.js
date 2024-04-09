@@ -6,7 +6,7 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+ const firebaseConfig = {
     apiKey: "AIzaSyAnLlzwz51wtxXBs1VifL6HPdFHSVaZMRI",
     authDomain: "wordle-your-friends.firebaseapp.com",
     databaseURL: "https://wordle-your-friends-default-rtdb.firebaseio.com",
@@ -17,6 +17,4 @@ const firebaseConfig = {
     measurementId: "G-4L20R015VQ"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+ export default firebaseConfig
