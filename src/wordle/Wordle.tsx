@@ -1,24 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Button, Col, Flex, Row} from "antd";
-import {doc, getDoc} from "firebase/firestore";
-import {db} from '../firebase/database-config'
-import {seedData} from "../firebase/data-seeder";
+import {Col, Flex, Row} from "antd";
+import {getWordOfTheDay} from '../firebase/database'
 import Tile from "./components/Tile";
-
-
-const getWordOfTheDay = async () => {
-
-    const docRef = doc(db, "words", "2024-04-08");
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        return docSnap.data()
-    } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}
+import Keyboard from "./components/Keyboard";
 
 const Wordle = (props: any) => {
 
@@ -31,16 +15,24 @@ const Wordle = (props: any) => {
                 setPuzzle(wordData.word);
             }
         })();
-    }, []); // The empty dependency array ensures this effect runs only once on mount
-    return (
-        <Flex justify={'center'}>
-            {/*<Button onClick={() => seedData()}>Data Seeder</Button>*/}
-            <Row gutter={[8, 8]}>
-                {puzzle.split("").map((letter, index) => <Col key={index}> <Tile letter={letter}/> </Col>)}
-            </Row>
-        </Flex>
+    }, []);
 
+
+    return (
+        <div style={{height: "100%", display: 'flex', justifyContent: 'start', flexDirection: 'column'}}>
+            <div style={{flexGrow: 1}}>
+            {[...Array(6)].map((_, rowIndex) => (
+                <Row key={rowIndex} wrap={false} gutter={[8, 8]} justify={'center'}>
+                    {puzzle.split("").map((letter, index) => (
+                        <Col key={index}> <Tile letter={letter}/> </Col>
+                    ))}
+                </Row>
+            ))}
+            </div>
+            <Keyboard puzzle={puzzle}/>
+        </div>
     )
 }
+
 
 export default Wordle

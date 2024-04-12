@@ -2,7 +2,7 @@ import {words} from './wordle_words_no_dates'
 import dayjs from 'dayjs';
 import { collection, addDoc } from "firebase/firestore";
 import {doc, setDoc} from "firebase/firestore";
-import {db} from './database-config'
+import {db} from './database'
 
 const seedDate = dayjs('2024-04-08');
 
