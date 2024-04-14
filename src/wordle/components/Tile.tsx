@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Card} from "antd";
 
 
-const Tile = (props: {letter: string}) => {
+const Tile = (props: {puzzleLetter: string, letter:string}) => {
 
     return (
         <Card >

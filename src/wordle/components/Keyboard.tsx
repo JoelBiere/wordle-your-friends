@@ -32,6 +32,7 @@ const keys = [
 ]
 const Keyboard = (props: { puzzle: string }) => {
 
+
     return (
         <div style={{display: 'flex', justifyContent: 'flex-end', flexDirection: 'column', marginTop:'auto'}}>
             <KeyboardRow>
