@@ -8,7 +8,7 @@ const Wordle = (props: any) => {
 
     const [puzzle, setPuzzle] = useState("")
     const [keysPressed, setKeysPressed] = useState<string[]>([])
-    const [guesses, setGuesses] = useState<string[]>(Array(6))
+    const [guesses, setGuesses] = useState<string[]>([])
 
     useEffect(() => {
         (async () => {
@@ -26,8 +26,10 @@ const Wordle = (props: any) => {
                 setKeysPressed(prevKeys => prevKeys.slice(0, -1));
                 console.log("key was backspace")
             }
-            if(event.key === "Enter") {
+            if(event.key === "Enter" && keysPressed.length === 5) {
+                console.log("Added to guesses", keysPressed.join(''))
                 setGuesses([...guesses, keysPressed.join('')])
+                setKeysPressed([])
             }
             else {
                 // add key to keypressed, unless keypressed is full
@@ -52,7 +54,7 @@ const Wordle = (props: any) => {
             {[...Array(6)].map((_, rowIndex) => (
                 <Row key={rowIndex} wrap={false} gutter={[8, 8]} justify={'center'}>
                     {puzzle.split("").map((puzzleLetter, index) => (
-                        <Col key={index}> <Tile puzzleLetter={puzzleLetter} letter={keysPressed[index] ? keysPressed[index] : ''}/> </Col>
+                        <Col key={index}> <Tile guessIndex={rowIndex} puzzleLetter={puzzleLetter} guessCount={guesses.length} letter={keysPressed[index] ? keysPressed[index] : ''}/> </Col>
                     ))}
                 </Row>
             ))}
