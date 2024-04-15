@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {Col, Flex, Row} from "antd";
+import {Col, Row} from "antd";
 import {getWordOfTheDay} from '../firebase/database'
 import Tile from "./components/Tile";
 import Keyboard from "./components/Keyboard";
 
-const Wordle = (props: any) => {
+const Wordle = (props: {theme: 'dark'| 'light'}) => {
 
-    const [puzzle, setPuzzle] = useState("")
+    const [answer, setAnswer] = useState("")
     const [keysPressed, setKeysPressed] = useState<string[]>([])
     const [guesses, setGuesses] = useState<string[]>([])
 
@@ -14,7 +14,7 @@ const Wordle = (props: any) => {
         (async () => {
             const wordData = await getWordOfTheDay();
             if (wordData && wordData.word) {
-                setPuzzle(wordData.word);
+                setAnswer(wordData.word);
             }
         })();
     }, []);
@@ -26,12 +26,11 @@ const Wordle = (props: any) => {
                 setKeysPressed(prevKeys => prevKeys.slice(0, -1));
                 console.log("key was backspace")
             }
-            if(event.key === "Enter" && keysPressed.length === 5) {
+            if (event.key === "Enter" && keysPressed.length === 5) {
                 console.log("Added to guesses", keysPressed.join(''))
                 setGuesses([...guesses, keysPressed.join('')])
                 setKeysPressed([])
-            }
-            else {
+            } else {
                 // add key to keypressed, unless keypressed is full
                 if (event.key.length === 1 && event.key.match(/[a-z]/i) && keysPressed.length < 5) {
                     setKeysPressed(prevKeys => [...prevKeys, event.key.toUpperCase()]);
@@ -51,15 +50,17 @@ const Wordle = (props: any) => {
     return (
         <div style={{height: "100%", display: 'flex', justifyContent: 'start', flexDirection: 'column'}}>
             <div style={{flexGrow: 1}}>
-            {[...Array(6)].map((_, rowIndex) => (
-                <Row key={rowIndex} wrap={false} gutter={[8, 8]} justify={'center'}>
-                    {puzzle.split("").map((puzzleLetter, index) => (
-                        <Col key={index}> <Tile guessIndex={rowIndex} puzzleLetter={puzzleLetter} guessCount={guesses.length} letter={keysPressed[index] ? keysPressed[index] : ''}/> </Col>
-                    ))}
-                </Row>
-            ))}
+                {[...Array(6)].map((_, rowIndex) => (
+                    <Row key={rowIndex} wrap={false} gutter={[8, 8]} justify={'center'}>
+                        {answer.split("").map((answerLetter, index) => (
+                            <Col key={index}> <Tile theme={'light'} answer={answer} guessIndex={rowIndex}
+                                                    answerLetter={answerLetter} guessCount={guesses.length}
+                                                    letter={keysPressed[index] ? keysPressed[index] : ''} colIndex={index}/> </Col>
+                        ))}
+                    </Row>
+                ))}
             </div>
-            <Keyboard puzzle={puzzle} />
+            <Keyboard puzzle={answer}/>
         </div>
     )
 }

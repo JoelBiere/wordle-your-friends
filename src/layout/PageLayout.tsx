@@ -41,7 +41,7 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
                 >
                 </Sider>
                 <Content>
-                    <Wordle/>
+                    <Wordle theme={props.darkMode ? 'dark' : 'light'}/>
                 </Content>
             </Layout>
             <Footer>

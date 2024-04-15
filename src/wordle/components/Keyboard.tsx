@@ -3,32 +3,9 @@ import Key from "./Key";
 import {Row} from "antd";
 
 const keys = [
-    'Q',
-    'W',
-    'E',
-    'R',
-    'T',
-    'Y',
-    'U',
-    'I',
-    'O',
-    'P',
-    'A',
-    'S',
-    'D',
-    'F',
-    'G',
-    'H',
-    'J',
-    'K',
-    'L',
-    'Z',
-    'X',
-    'C',
-    'V',
-    'B',
-    'N',
-    'M',
+    'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+    'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
+    'Enter','Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace'
 ]
 const Keyboard = (props: { puzzle: string }) => {
 
@@ -42,7 +19,7 @@ const Keyboard = (props: { puzzle: string }) => {
                 {keys.slice(10, 19).map(char => <Key letter={char} key={char}/>)}
             </KeyboardRow>
             <KeyboardRow>
-                {keys.slice(19, 26).map(char => <Key letter={char} key={char}/>)}
+                {keys.slice(19, 28).map(char => <Key letter={char} key={char}/>)}
             </KeyboardRow>
         </div>
     )

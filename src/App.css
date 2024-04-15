@@ -36,3 +36,29 @@
 /*    transform: rotate(360deg);*/
 /*  }*/
 /*}*/
+
+.flip-enter {
+    transform: rotateX(0deg);
+}
+.flip-enter-active {
+    transform: rotateX(180deg);
+    transition: transform 600ms; /* Increased duration for slower flip */
+}
+.flip-exit {
+    transform: rotateX(180deg);
+}
+.flip-exit-active {
+    transform: rotateX(0deg);
+    transition: transform 600ms;
+}
+.card-front, .card-back {
+    backface-visibility: hidden; /* Ensures that the backface is not visible when flipped */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.card-back {
+    transform: rotateX(180deg); /* Rotate the back initially */
+}
+
+
