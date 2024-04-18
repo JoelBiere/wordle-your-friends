@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Card} from "antd";
-import { CSSTransition } from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
+import styled from "styled-components";
 
 export const ResultColor = {
     light: {
@@ -30,7 +31,7 @@ const Tile = (props: {
     const [letter, setLetter] = useState('')
     const [guessedLetter, setGuessedLetter] = useState('')
     const [color, setColor] = useState<string>(ResultColor[props.theme].default)
-    const [inProp, setInProp] = useState(false); // State to manage the flip effect
+    const [flipped, setFlipped] = useState(false); // State to manage the flip effect
 
     const submitGuess = () => {
         console.log(`entering submitGuess puzzle is ${props.answerLetter} guessed is ${letter}`)
@@ -46,16 +47,16 @@ const Tile = (props: {
     }
 
     useEffect(() => {
-        if(color !== ResultColor[props.theme].default){
+        if (color !== ResultColor[props.theme].default) {
             const delay = props.colIndex * 100; // 100ms delay increment per tile
             const timer = setTimeout(() => {
-                setInProp(true);
+                setFlipped(true);
             }, delay);
 
             return () => clearTimeout(timer);
         }
 
-    },[color, props.colIndex])
+    }, [color, props.colIndex])
 
     useEffect(() => {
         if (props.guessCount === props.guessIndex + 1) {
@@ -65,21 +66,69 @@ const Tile = (props: {
         }
     }, [props.letter, props.guessCount]);
 
+
     return (
-        <CSSTransition in={inProp} timeout={300} classNames="flip">
-        <Card style={
-            {
-                backgroundColor: color,
-                color: color === ResultColor[props.theme].default ? 'black' : ResultColor[props.theme].default,
-                fontSize: 'larger',
-                fontWeight: 'bolder'
-            }}>
-            {guessedLetter ? guessedLetter : letter}
-        </Card>
-        </CSSTransition>
+        <FlipCard onClick={() => setFlipped(!flipped)}>
+            <FlipCardInner flipped={flipped}>
+                <FlipCardFront>
+                    {letter}
+                </FlipCardFront>
+                <FlipCardBack color={color}>
+                    {guessedLetter}
+                </FlipCardBack>
+            </FlipCardInner>
+        </FlipCard>
     )
 
 }
 
 export default Tile
 
+// Styled components
+const FlipCard = styled.div`
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+
+
+const CardFace = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+`;
+
+const FlipCardFront = styled(CardFace)`
+  background-color: #bbb;
+  color: black;
+`;
+
+interface FlippedCardBackProps {
+    color: string
+}
+
+const FlipCardBack = styled(CardFace)<FlippedCardBackProps>`
+  background-color: ${props => props.color};
+  color: white;
+  transform: rotateY(180deg);
+`;
+// Define an interface for the props
+interface FlipCardInnerProps {
+    flipped: boolean;
+}
+const FlipCardInner = styled.div<FlipCardInnerProps>`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  transform: ${props => props.flipped ? 'rotateY(180deg)' : 'rotateY(0deg)'};
+`;
