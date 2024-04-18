@@ -91,9 +91,6 @@ const FlipCard = styled.div`
     height: 50px;
     border: 1px solid #f1f1f1;
     perspective: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `;
 
 
@@ -103,6 +100,9 @@ const CardFace = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `;
 
 const FlipCardFront = styled(CardFace)`
