@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Col, Row} from "antd";
 import {getWordOfTheDay} from '../firebase/database'
-import Tile from "./components/Tile";
-import Keyboard from "./components/Keyboard";
+import Tile from "./components/tile/Tile";
+import Keyboard from "./components/keyboard/Keyboard";
 
-const Wordle = (props: {theme: 'dark'| 'light'}) => {
+const Wordle = (props: { theme: 'dark' | 'light' }) => {
 
     const [answer, setAnswer] = useState("")
     const [keysPressed, setKeysPressed] = useState<string[]>([])
@@ -55,7 +55,8 @@ const Wordle = (props: {theme: 'dark'| 'light'}) => {
                         {answer.split("").map((answerLetter, index) => (
                             <Col key={index}> <Tile theme={'light'} answer={answer} guessIndex={rowIndex}
                                                     answerLetter={answerLetter} guessCount={guesses.length}
-                                                    letter={keysPressed[index] ? keysPressed[index] : ''} colIndex={index}/> </Col>
+                                                    letter={keysPressed[index] ? keysPressed[index] : ''}
+                                                    colIndex={index}/> </Col>
                         ))}
                     </Row>
                 ))}
