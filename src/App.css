@@ -1,0 +1,28 @@
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake-and-bake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+
+/* Styles for small devices */
+@media (max-width: 600px) {
+    .key-button {
+        padding: 4px 8px;  /* Smaller padding */
+        font-size: 12px;   /* Smaller font size */
+        min-width: 30px;
+    }
+}
+
+/* Styles for medium devices */
+@media (min-width: 601px) {
+    .key-button {
+        padding: 6px 12px; /* Medium padding */
+        font-size: 14px;   /* Medium font size */
+        min-width: 40px;
+    }
+}

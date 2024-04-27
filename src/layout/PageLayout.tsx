@@ -1,19 +1,22 @@
 import React from "react";
-import {Button, Col, Layout, Row, Switch, Typography} from "antd";
+import {Button, Col, Layout, Row, Switch, Typography, theme} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import Wordle from "../wordle";
 import {LeftOutlined, MenuOutlined, MoonOutlined, SunOutlined} from "@ant-design/icons";
 import Sider from "antd/es/layout/Sider";
 
-
+const { useToken } = theme
 const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
     const [siderOpen, setSiderOpen] = React.useState(false);
+
+    const { token, theme } = useToken()
+
     return (
 
-        <Layout style={{maxHeight: "100vh", minHeight: "100vh", margin:0, padding:0}}>
+        <Layout style={{maxHeight: "100vh", minHeight: "100vh", maxWidth:"100vw", minWidth:"100vw", margin:0, padding:0}}>
             <Header
-                style={{backgroundColor: !props.darkMode ? "#F5F5F5" : "#001529", borderBottom: '1px solid #F0F0F0'}}>
+                style={{backgroundColor: token.colorBgContainer, borderBottom: `1px solid ${token.colorBorder}`}}>
                 <Row wrap={false} justify="space-between" align="middle" style={{height: "100%"}}>
                     <Col>
                         <Button icon={siderOpen ? <LeftOutlined/> : <MenuOutlined/>}
@@ -36,17 +39,17 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
             <Layout hasSider={true}>
                 <Sider
                     collapsed={!siderOpen}
-                    style={{backgroundColor: !props.darkMode ? "#F5F5F5" : "#001529", borderRight: '1px solid #F0F0F0'}}
+                    style={{backgroundColor: token.colorBgContainer, borderRight: `1px solid ${token.colorBorder}`}}
                     collapsedWidth={0}
                 >
                 </Sider>
-                <Content>
+                <Content >
                     <Wordle theme={props.darkMode ? 'dark' : 'light'}/>
                 </Content>
             </Layout>
-            <Footer>
-                footer
-            </Footer>
+            {/*<Footer>*/}
+            {/*    footer*/}
+            {/*</Footer>*/}
         </Layout>
     )
 }

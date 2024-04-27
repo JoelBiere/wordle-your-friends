@@ -16,13 +16,13 @@ const Tile = (props: {
 }) => {
     const { token, theme } = useToken()
 
-    console.log(`token is ${token.colorBgContainer} theme is ${theme.id}`)
+    // console.log(`token is ${token.colorBgContainer} theme is ${theme.id}`)
     const [letter, setLetter] = useState('')
     const [guessedLetter, setGuessedLetter] = useState('')
     const [color, setColor] = useState<string>(ResultColor[props.theme].default)
     const [flipped, setFlipped] = useState(false); // State to manage the flip effect
 
-    const submitGuess = () => {
+    const guessSubmitted = () => {
         console.log(`entering submitGuess puzzle is ${props.answerLetter} guessed is ${letter}`)
         // user just submitted guess, permantly display
         setGuessedLetter(letter)
@@ -49,7 +49,7 @@ const Tile = (props: {
 
     useEffect(() => {
         if (props.guessCount === props.guessIndex + 1) {
-            submitGuess()
+            guessSubmitted()
         } else {
             setLetter(props.guessIndex === props.guessCount ? props.letter : '')
         }
@@ -58,7 +58,6 @@ const Tile = (props: {
 
     return (
         <div
-            onClick={() => setFlipped(!flipped)}
             style={{
                 backgroundColor: "transparent",
                 width: "50px",

@@ -1,7 +1,6 @@
 import React from 'react'
-import styled from "styled-components";
 import {Button, Col, Typography} from "antd";
-import {LeftOutlined} from "@ant-design/icons";
+import {EnterOutlined, LeftOutlined} from "@ant-design/icons";
 
 const Key = (props: { letter: string },) => {
     const {letter} = props
@@ -10,11 +9,21 @@ const Key = (props: { letter: string },) => {
         window.dispatchEvent(event);
     };
 
+    const renderLetter = (char: string) => {
+        if(char === "Backspace"){
+            return <LeftOutlined />
+        }
+        if(char === "Enter"){
+            return <EnterOutlined  />
+        }
+        return char
+    }
+
     return (
-        <Col>
+        <Col xs={2} sm={4} md={6} lg={8} xl={10}>
             {/*<StyledKey style={ isActive ? {backgroundColor: 'blue'} : {}}>*/}
-            <Button onClick={() => simulateKeydown()}>
-                <Typography.Text>{letter !== "Backspace" ? letter : <LeftOutlined />}</Typography.Text>
+            <Button onClick={() => simulateKeydown()} className="key-button" >
+                <Typography.Text>{renderLetter(letter)}</Typography.Text>
             </Button>
             {/*</StyledKey>*/}
         </Col>
@@ -25,14 +34,14 @@ const Key = (props: { letter: string },) => {
 export default Key
 
 
-const StyledKey = styled.div`
-    background-color: beige;
-    border: cadetblue 1px solid;
-    border-radius: 5px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-`
+// const StyledKey = styled.div`
+//     background-color: beige;
+//     border: cadetblue 1px solid;
+//     border-radius: 5px;
+//     width: 40px;
+//     height: 40px;
+//     display: flex;
+//     text-align: center;
+//     align-items: center;
+//     justify-content: center;
+// `
