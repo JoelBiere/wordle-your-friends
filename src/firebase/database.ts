@@ -1,8 +1,7 @@
-import {doc, getDoc, getFirestore} from "firebase/firestore";
-import app from "./init";
-import dayjs from "dayjs";
+import {doc, getDoc} from "firebase/firestore";
 
-export const db = getFirestore(app);
+import dayjs from "dayjs";
+import  {db} from "./config";
 
 export const getWordOfTheDay = async () => {
 

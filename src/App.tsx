@@ -1,11 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {App as AntApp, ConfigProvider, theme} from "antd";
 import PageLayout from "./layout";
 import en_US from 'antd/locale'
-import {initializeApp} from "firebase/app";
-import firebaseConfig from "./firebase/config";
-
 
 function App() {
 
@@ -13,10 +10,6 @@ function App() {
 
     const [darkMode, setDarkMode] = useState(false);
 
-    useEffect(() => {
-        initializeApp(firebaseConfig);
-        // const analytics = getAnalytics(app);
-    }, [])
     return (
         <div className="App">
             <ConfigProvider

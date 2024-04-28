@@ -4,7 +4,10 @@
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+import {getFirestore} from "firebase/firestore";
+import { initializeApp } from 'firebase/app';
+
+export const firebaseConfig = {
     apiKey: "AIzaSyAnLlzwz51wtxXBs1VifL6HPdFHSVaZMRI",
     authDomain: "wordle-your-friends.firebaseapp.com",
     databaseURL: "https://wordle-your-friends-default-rtdb.firebaseio.com",
@@ -15,4 +18,8 @@ const firebaseConfig = {
     measurementId: "G-4L20R015VQ"
 };
 
-export default firebaseConfig
+const firebaseApp = initializeApp(firebaseConfig);
+
+export const db = getFirestore(firebaseApp);
+
+export default firebaseApp;
