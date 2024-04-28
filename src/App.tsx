@@ -4,19 +4,18 @@ import {App as AntApp, ConfigProvider, theme} from "antd";
 import PageLayout from "./layout";
 import en_US from 'antd/locale'
 import {initializeApp} from "firebase/app";
-import {getAnalytics} from "firebase/analytics";
 import firebaseConfig from "./firebase/config";
 
 
 function App() {
 
-    const {darkAlgorithm, compactAlgorithm} = theme;
+    const {darkAlgorithm} = theme;
 
     const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
     }, [])
     return (
         <div className="App">

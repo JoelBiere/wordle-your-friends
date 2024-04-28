@@ -1,12 +1,10 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
- const firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyAnLlzwz51wtxXBs1VifL6HPdFHSVaZMRI",
     authDomain: "wordle-your-friends.firebaseapp.com",
     databaseURL: "https://wordle-your-friends-default-rtdb.firebaseio.com",
@@ -17,4 +15,4 @@ import { getAnalytics } from "firebase/analytics";
     measurementId: "G-4L20R015VQ"
 };
 
- export default firebaseConfig
+export default firebaseConfig

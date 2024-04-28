@@ -11,7 +11,7 @@ const Keyboard = (props: { puzzle: string }) => {
 
 
     return (
-        <div style={{display: 'flex', justifyContent: 'flex-end', flexDirection: 'column', marginTop:'auto', marginBottom:'20px'}}>
+        <div style={{display: 'flex', justifyContent: 'flex-end', flexDirection: 'column', marginTop:'auto', marginBottom:'50px'}}>
             <KeyboardRow>
                 {keys.slice(0, 10).map(char => <Key letter={char} key={char}/>)}
             </KeyboardRow>

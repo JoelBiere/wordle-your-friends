@@ -20,7 +20,7 @@ const Key = (props: { letter: string },) => {
     }
 
     return (
-        <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+        <Col >
             {/*<StyledKey style={ isActive ? {backgroundColor: 'blue'} : {}}>*/}
             <Button onClick={() => simulateKeydown()} className="key-button" >
                 <Typography.Text>{renderLetter(letter)}</Typography.Text>
