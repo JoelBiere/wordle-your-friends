@@ -3,8 +3,6 @@ import {Col, message, Row} from "antd";
 import {getWordOfTheDay, isWordInList} from '../firebase/database'
 import Tile from "./components/tile/Tile";
 import Keyboard from "./components/keyboard/Keyboard";
-import {Simulate} from "react-dom/test-utils";
-import submit = Simulate.submit;
 
 const Wordle = (props: { theme: 'dark' | 'light' }) => {
 
@@ -39,14 +37,14 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         const validGuess = await isWordInList(guess)
         if (validGuess) {
             console.log("Added to guesses", guess)
-            setGuesses([...guesses, guess])
+            setGuesses((prevGuesses) => [...prevGuesses, guess])
             setKeysPressed([])
         } else {
             console.log("Do not add guess. it wasn't valid word")
             setShakeCurrentRow(true)
             messageApi.warning("Not a word in list.").then(r => console.log("Not a word in list"))
         }
-    }, [keysPressed, setGuesses, setKeysPressed, messageApi]);
+    }, [keysPressed, messageApi]);
 
     const handleKeyPress = useCallback ((event: KeyboardEvent) => {
         if (event.key === "Backspace") {

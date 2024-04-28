@@ -10,7 +10,7 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
 
     const [siderOpen, setSiderOpen] = React.useState(false);
 
-    const {token} = useToken()
+    const {token}= useToken()
 
     return (
 
