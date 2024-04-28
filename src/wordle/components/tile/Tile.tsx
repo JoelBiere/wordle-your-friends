@@ -22,8 +22,6 @@ const Tile = (props: {
     const [color, setColor] = useState<string>(ResultColor[props.theme].default)
     const [flipped, setFlipped] = useState(false); // State to manage the flip effect
 
-
-
     useEffect(() => {
         if (color !== ResultColor[props.theme].default) {
             const delay = props.colIndex * 100; // 100ms delay increment per tile

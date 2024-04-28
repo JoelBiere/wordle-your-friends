@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Col, message, Row} from "antd";
 import {getWordOfTheDay, isWordInList} from '../firebase/database'
 import Tile from "./components/tile/Tile";
 import Keyboard from "./components/keyboard/Keyboard";
+import {Simulate} from "react-dom/test-utils";
+import submit = Simulate.submit;
 
 const Wordle = (props: { theme: 'dark' | 'light' }) => {
 
@@ -31,34 +33,8 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         })();
     }, []);
 
-
-    useEffect(() => {
-        const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.key === "Backspace") {
-                setKeysPressed(prevKeys => prevKeys.slice(0, -1));
-                console.log("key was backspace")
-            }
-            if (event.key === "Enter" && keysPressed.length === 5) {
-                submitGuess()
-            } else {
-                // add key to keypressed, unless keypressed is full
-                if (event.key.length === 1 && event.key.match(/[a-z]/i) && keysPressed.length < 5) {
-                    setKeysPressed(prevKeys => [...prevKeys, event.key.toUpperCase()]);
-                    console.log("key was", event.key)
-                }
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyPress);
-        console.log("keysPressed is now", keysPressed)
-        // Cleanup
-        return () => {
-            window.removeEventListener('keydown', handleKeyPress);
-        };
-    }, [keysPressed]);
-
-    const submitGuess = async () => {
-        // check if word in list
+    const submitGuess = useCallback(async () => {
+        // submit guess
         const guess = keysPressed.join('')
         const validGuess = await isWordInList(guess)
         if (validGuess) {
@@ -68,9 +44,35 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         } else {
             console.log("Do not add guess. it wasn't valid word")
             setShakeCurrentRow(true)
-            messageApi.warning("Not a word in list.")
+            messageApi.warning("Not a word in list.").then(r => console.log("Not a word in list"))
         }
-    }
+    }, [keysPressed, setGuesses, setKeysPressed, messageApi]);
+
+    const handleKeyPress = useCallback ((event: KeyboardEvent) => {
+        if (event.key === "Backspace") {
+            setKeysPressed(prevKeys => prevKeys.slice(0, -1));
+            console.log("key was backspace")
+        }
+        if (event.key === "Enter" && keysPressed.length === 5) submitGuess().then(r => console.log("Guess Submitted"))
+            else {
+            // add key to keypressed, unless keypressed is full
+            if (event.key.length === 1 && event.key.match(/[a-z]/i) && keysPressed.length < 5) {
+                setKeysPressed(prevKeys => [...prevKeys, event.key.toUpperCase()]);
+                console.log("key was", event.key)
+            }
+        }
+    }, [keysPressed, submitGuess]);
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyPress);
+        console.log("keysPressed is now", keysPressed)
+        // Cleanup
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [keysPressed, handleKeyPress]);
+
+
     return (
         <>
             {contextHolder}

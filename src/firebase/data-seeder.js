@@ -1,6 +1,5 @@
 import {words} from './wordle_words_no_dates'
 import dayjs from 'dayjs';
-import { collection, addDoc } from "firebase/firestore";
 import {doc, setDoc} from "firebase/firestore";
 import {db} from './database'
 
