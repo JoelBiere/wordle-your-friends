@@ -42,7 +42,7 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         } else {
             console.log("Do not add guess. it wasn't valid word")
             setShakeCurrentRow(true)
-            messageApi.warning("Not a word in list.").then(r => console.log("Not a word in list"))
+            messageApi.warning("Not a word in list.").then(r => console.log(`Not a word in list ${r}`))
         }
     }, [keysPressed, messageApi]);
 
@@ -72,11 +72,11 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
 
 
     return (
-        <>
-            {contextHolder}
-            <div style={{height: "100%", display: 'flex', justifyContent: 'start', flexDirection: 'column'}}>
-                <div style={{flexGrow: 1}}>
-                    {[...Array(6)].map((_, rowIndex) => (
+        <div style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: '90vh'}}>
+            <div style={{display: 'flex', justifyContent: 'start', flexDirection: 'column'}}>
+                {contextHolder}
+
+                {[...Array(6)].map((_, rowIndex) => (
                         <Row
                             key={rowIndex}
                             wrap={false}
@@ -93,10 +93,11 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
                             ))}
                         </Row>
                     ))}
-                </div>
-                <Keyboard puzzle={answer}/>
             </div>
-        </>
+            <div style={{marginTop: 'auto'}}>
+                <Keyboard />
+            </div>
+        </div>
 
     )
 }

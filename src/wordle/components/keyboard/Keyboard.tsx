@@ -7,11 +7,11 @@ const keys = [
     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
     'Enter','Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace'
 ]
-const Keyboard = (props: { puzzle: string }) => {
+const Keyboard = () => {
 
 
     return (
-        <div style={{display: 'flex', justifyContent: 'flex-end', flexDirection: 'column', marginTop:'auto', marginBottom:'50px'}}>
+        <>
             <KeyboardRow>
                 {keys.slice(0, 10).map(char => <Key letter={char} key={char}/>)}
             </KeyboardRow>
@@ -21,10 +21,10 @@ const Keyboard = (props: { puzzle: string }) => {
             <KeyboardRow>
                 {keys.slice(19, 28).map(char => <Key letter={char} key={char}/>)}
             </KeyboardRow>
-        </div>
+        </>
     )
 }
 
 export default Keyboard
 
-const KeyboardRow = ({...props}) => <Row wrap={false} justify={'center'} gutter={8}>{props.children}</Row>
+const KeyboardRow = ({...props}) => <Row style={{marginTop: '8px'}} wrap={false} justify={'center'} gutter={8}>{props.children}</Row>
