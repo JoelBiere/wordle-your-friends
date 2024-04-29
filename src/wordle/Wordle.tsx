@@ -46,13 +46,13 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         }
     }, [keysPressed, messageApi]);
 
-    const handleKeyPress = useCallback ((event: KeyboardEvent) => {
+    const handleKeyPress = useCallback((event: KeyboardEvent) => {
         if (event.key === "Backspace") {
             setKeysPressed(prevKeys => prevKeys.slice(0, -1));
             console.log("key was backspace")
         }
         if (event.key === "Enter" && keysPressed.length === 5) submitGuess().then(r => console.log("Guess Submitted"))
-            else {
+        else {
             // add key to keypressed, unless keypressed is full
             if (event.key.length === 1 && event.key.match(/[a-z]/i) && keysPressed.length < 5) {
                 setKeysPressed(prevKeys => [...prevKeys, event.key.toUpperCase()]);
@@ -72,32 +72,37 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
 
 
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: '90vh'}}>
-            <div style={{display: 'flex', justifyContent: 'start', flexDirection: 'column'}}>
+        <>
+            <div>
                 {contextHolder}
 
                 {[...Array(6)].map((_, rowIndex) => (
-                        <Row
-                            key={rowIndex}
-                            wrap={false}
-                            gutter={[8, 8]}
-                            justify={'center'}
-                            className={shakeCurrentRow && guesses.length === rowIndex ? "shake-and-bake" : ""}
-                            data-key={shakeKey}
-                        >
-                            {answer.split("").map((answerLetter, index) => (
-                                <Col key={index}> <Tile theme={'light'} answer={answer} guessIndex={rowIndex}
-                                                        answerLetter={answerLetter} guessCount={guesses.length}
-                                                        letter={keysPressed[index] ? keysPressed[index] : ''}
-                                                        colIndex={index}/> </Col>
-                            ))}
-                        </Row>
-                    ))}
+                    <Row
+                        key={rowIndex}
+                        wrap={false}
+                        gutter={[8, 8]}
+                        justify={'center'}
+                        className={shakeCurrentRow && guesses.length === rowIndex ? "shake-and-bake" : ""}
+                        data-key={shakeKey}
+                    >
+                        {answer.split("").map((answerLetter, index) => (
+                            <Col key={index}> <Tile theme={'light'} answer={answer} guessIndex={rowIndex}
+                                                    answerLetter={answerLetter} guessCount={guesses.length}
+                                                    letter={keysPressed[index] ? keysPressed[index] : ''}
+                                                    colIndex={index}/> </Col>
+                        ))}
+                    </Row>
+                ))}
             </div>
-            <div style={{marginTop: 'auto'}}>
-                <Keyboard />
+            <div style={{
+                marginTop: 'auto',
+                marginBottom: '30px'
+            }}
+            >
+                <Keyboard/>
             </div>
-        </div>
+
+        </>
 
     )
 }
