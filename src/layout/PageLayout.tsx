@@ -47,7 +47,7 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
                 />
             </Header>
             <Drawer open={siderOpen} onClose={() => setSiderOpen(false)} placement={'left'}>You found me!</Drawer>
-            <div style={{display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                 <Wordle theme={props.darkMode ? 'dark' : 'light'}/>
             </div>
 

@@ -95,8 +95,11 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
                 ))}
             </div>
             <div style={{
-                marginTop: 'auto',
-                marginBottom: '30px'
+                position: 'fixed',
+                left: 0,
+                right: 0,
+                bottom: 50,
+                zIndex: 1000
             }}
             >
                 <Keyboard/>
