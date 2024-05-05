@@ -83,11 +83,11 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
     useEffect(() => {
         const guess = guesses[guesses.length - 1]
         const correctGuess = guess?.toUpperCase() === answer?.toUpperCase()
-        if( correctGuess || !correctGuess && guesses.length === 6){
+        if( correctGuess || (!correctGuess && guesses.length === 6)){
             // setEndOfGameModalOpen(true)
             generateEndOfGame(correctGuess)
         }
-    }, [guesses]);
+    }, [guesses, answer]);
 
     return (
         <>
