@@ -23,7 +23,7 @@ const CardFace = styled.div`
 `;
 export const FlipCardFront = styled(CardFace)<FlippedCardProps>`
     background-color: ${props => props.backgroundColor};
-    ${props => props.color};`;
+    color: ${props => props.color};`;
 
 
 

@@ -3,6 +3,7 @@ import {Col, message, Row} from "antd";
 import {getWordOfTheDay, isWordInList} from '../firebase/database'
 import Tile from "./components/tile/Tile";
 import Keyboard from "./components/keyboard/Keyboard";
+import EndOfGameModal from "./components/feedback/EndOfGameModal";
 
 const Wordle = (props: { theme: 'dark' | 'light' }) => {
 
@@ -12,7 +13,8 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
     const [messageApi, contextHolder] = message.useMessage();
     const [shakeCurrentRow, setShakeCurrentRow] = useState(false)
     const [shakeKey, setShakeKey] = useState(0); // state to force rerender of the shaking row
-
+    const [endOfGame, setEndOfGame] = useState(false)
+    const [won, setWon] = useState(false)
     useEffect(() => {
         if (shakeCurrentRow) {
             setTimeout(() => {
@@ -38,6 +40,7 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         if (validGuess) {
             console.log("Added to guesses", guess)
             setGuesses((prevGuesses) => [...prevGuesses, guess])
+
             setKeysPressed([])
         } else {
             console.log("Do not add guess. it wasn't valid word")
@@ -62,20 +65,35 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
     }, [keysPressed, submitGuess]);
 
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyPress);
-        console.log("keysPressed is now", keysPressed)
-        // Cleanup
-        return () => {
-            window.removeEventListener('keydown', handleKeyPress);
-        };
-    }, [keysPressed, handleKeyPress]);
+        if (!endOfGame){
+            window.addEventListener('keydown', handleKeyPress);
+            console.log("keysPressed is now", keysPressed)
+            // Cleanup
+            return () => {
+                window.removeEventListener('keydown', handleKeyPress);
+            };
+        }
+    }, [keysPressed, handleKeyPress, endOfGame]);
 
+    const generateEndOfGame = (won: boolean) => {
+        console.log("End of game sequence init")
+        setEndOfGame(true)
+        setWon(won)
+    }
+    useEffect(() => {
+        const guess = guesses[guesses.length - 1]
+        const correctGuess = guess?.toUpperCase() === answer?.toUpperCase()
+        if( correctGuess || !correctGuess && guesses.length === 6){
+            // setEndOfGameModalOpen(true)
+            generateEndOfGame(correctGuess)
+        }
+    }, [guesses]);
 
     return (
         <>
             <div>
                 {contextHolder}
-
+                {endOfGame && <EndOfGameModal won={won} guesses={guesses} answer={answer}/>}
                 {[...Array(6)].map((_, rowIndex) => (
                     <Row
                         key={rowIndex}
