@@ -22,7 +22,7 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
             // flexDirection:'column'
 
         }}>
-            <DevRibbon> Still In Developemnt! </DevRibbon>
+            <DevRibbon> Still In Development! </DevRibbon>
 
             <Header style={{
                 backgroundColor: token.colorBgContainer,

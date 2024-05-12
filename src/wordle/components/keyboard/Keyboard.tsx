@@ -7,19 +7,19 @@ const keys = [
     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
     'Enter','Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace'
 ]
-const Keyboard = () => {
+const Keyboard = (props: {guesses: string[], answer: string, theme: 'light'|'dark'}) => {
 
 
     return (
         <>
             <KeyboardRow>
-                {keys.slice(0, 10).map(char => <Key letter={char} key={char}/>)}
+                {keys.slice(0, 10).map(char => <Key letter={char} key={char} guesses={props.guesses} answer={props.answer} theme={props.theme}/>)}
             </KeyboardRow>
             <KeyboardRow>
-                {keys.slice(10, 19).map(char => <Key letter={char} key={char}/>)}
+                {keys.slice(10, 19).map(char => <Key letter={char} key={char} guesses={props.guesses} answer={props.answer} theme={props.theme}/>)}
             </KeyboardRow>
             <KeyboardRow>
-                {keys.slice(19, 28).map(char => <Key letter={char} key={char}/>)}
+                {keys.slice(19, 28).map(char => <Key letter={char} key={char} guesses={props.guesses} answer={props.answer} theme={props.theme}/>)}
             </KeyboardRow>
         </>
     )

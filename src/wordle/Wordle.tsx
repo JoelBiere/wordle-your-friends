@@ -120,7 +120,7 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
                 zIndex: 1000
             }}
             >
-                <Keyboard/>
+                <Keyboard guesses={guesses} answer={answer} theme={props.theme}/>
             </div>
 
         </>
