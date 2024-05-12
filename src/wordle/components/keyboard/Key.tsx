@@ -50,7 +50,7 @@ const Key = (props: { letter: string, guesses: string[], answer: string, theme: 
                 }
             }
         })
-    }, [guesses, answer, letter,theme]);
+    }, [guesses, answer, letter, props.theme]);
     return (
         <Col >
             {/*<StyledKey style={ isActive ? {backgroundColor: 'blue'} : {}}>*/}
