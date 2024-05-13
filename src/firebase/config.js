@@ -20,6 +20,7 @@ export const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
+// export const ui = new firebaseui.auth.AuthUI(firebaseApp.auth())
 export const db = getFirestore(firebaseApp);
 
 export default firebaseApp;

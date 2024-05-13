@@ -26,35 +26,44 @@ const Key = (props: { letter: string, guesses: string[], answer: string, theme: 
         }
         return char
     }
+    const determineKeyBackgroundColor = () => {
+        let found = false;
+        let close = false
+        let correctPosition = false;
 
-    useEffect(() => {
         guesses.forEach(guess => {
-            if(guess.includes(letter)){
-                if(answer.includes(letter)){
-                    let correct = false
-                    answer.split('').forEach((char, index) => {
-                        if(char === guess[index]){
-                            correct = true
-                            setKeyColor(ResultColor[props.theme].correct)
-                            return
+            for (let i = 0; i < guess.length; i++) {
+                if (guess[i] === letter) {
+                    found = true;
+                    if(answer.includes(letter)){
+                        close = true
+                        if (answer[i] === letter) {
+                            correctPosition = true;
+                            break; // Stop checking further since it's correct in this guess
                         }
-                    })
-                    if(!correct){
-                        setKeyColor(ResultColor[props.theme].close)
                     }
 
                 }
-                else {
-                    setKeyColor(ResultColor[props.theme].wrong)
-                    return
-                }
             }
-        })
+        });
+
+        if (correctPosition) {
+            setKeyColor(ResultColor[props.theme].correct); // Green if correct position
+        } else if (close) {
+            setKeyColor(ResultColor[props.theme].close); // Yellow if found but not correct position
+        } else if (found) {
+            setKeyColor(ResultColor[props.theme].wrong); // Gray if not found
+        }
+    }
+
+    useEffect(() => {
+        determineKeyBackgroundColor()
     }, [guesses, answer, letter, props.theme]);
+
     return (
         <Col >
             {/*<StyledKey style={ isActive ? {backgroundColor: 'blue'} : {}}>*/}
-            <Button onClick={() => simulateKeydown()} className="key-button" size={'large'} style={{minHeight: '50px', minWidth: '30px', backgroundColor: keyColor ? keyColor : token.colorBgContainer}} >
+            <Button key={props.letter} onClick={() => simulateKeydown()} className="key-button" size={'large'} style={{minHeight: '50px', minWidth: '30px', backgroundColor: keyColor ? keyColor : token.colorBgContainer}} >
                 <Typography.Text>{renderLetter(letter)}</Typography.Text>
             </Button>
             {/*</StyledKey>*/}
