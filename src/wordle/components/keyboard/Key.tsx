@@ -58,7 +58,7 @@ const Key = (props: { letter: string, guesses: string[], answer: string, theme: 
 
     useEffect(() => {
         determineKeyBackgroundColor()
-    }, [guesses, answer, letter, props.theme]);
+    }, [guesses, answer, letter, props.theme, determineKeyBackgroundColor]);
 
     return (
         <Col >
