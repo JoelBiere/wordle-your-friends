@@ -146,7 +146,10 @@ const TilesContainer = styled.div`
 const KeyboardWrapper = styled.div<{backgroundColor: string}>`
     z-index: 1000;
     padding: 10px;
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     flex-shrink: 0;
     background-color: ${props => props.backgroundColor};
 `;
