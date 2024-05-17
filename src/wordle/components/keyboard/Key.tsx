@@ -26,8 +26,10 @@ const Key = (props: { letter: string, guesses: string[], answer: string, theme: 
         }
         return char
     }
-    const determineKeyBackgroundColor = () => {
-        let found = false;
+
+    useEffect(() => {
+        
+let found = false;
         let close = false
         let correctPosition = false;
 
@@ -54,10 +56,7 @@ const Key = (props: { letter: string, guesses: string[], answer: string, theme: 
         } else if (found) {
             setKeyColor(ResultColor[props.theme].wrong); // Gray if answer does not include
         }
-    }
 
-    useEffect(() => {
-        determineKeyBackgroundColor()
     }, [guesses, answer, letter, props.theme]);
 
     return (
