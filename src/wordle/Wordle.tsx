@@ -94,7 +94,7 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         <Container>
             {contextHolder}
             {endOfGame && <EndOfGameModal won={won} guesses={guesses} answer={answer}/>}
-            <div className={"tiles"}>
+            <TilesContainer>
                 {[...Array(6)].map((_, rowIndex) => (
                     <Row
                         key={rowIndex}
@@ -112,7 +112,7 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
                         ))}
                     </Row>
                 ))}
-            </div>
+            </TilesContainer>
             <KeyboardWrapper>
                 <Keyboard guesses={guesses} answer={answer} theme={props.theme}/>
             </KeyboardWrapper>
@@ -130,16 +130,20 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    flex-grow: 1;
+    justify-content: space-between;
+    //background: black
+`;
 
-    .tiles {
-        flex: 1;
-        padding: 20px;
-    }
+const TilesContainer = styled.div`
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    //background: red
 `;
 
 const KeyboardWrapper = styled.div`
-    position: relative;
     z-index: 1000;
+    padding: 10px; 
+    //background: white;
 `;

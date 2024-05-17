@@ -12,15 +12,11 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
 
     return (
         <Layout style={{
-            maxHeight: "100vh",
             minHeight: "100vh",
             maxWidth: "100vw",
             minWidth: "100vw",
             margin: 0,
             padding: 0,
-            // display: 'flex',
-            // flexDirection:'column'
-
         }}>
             <DevRibbon> Still In Development! </DevRibbon>
 
@@ -47,9 +43,9 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
                 />
             </Header>
             <Drawer open={siderOpen} onClose={() => setSiderOpen(false)} placement={'left'}>You found me!</Drawer>
-            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
-                <Wordle theme={props.darkMode ? 'dark' : 'light'}/>
-            </div>
+
+            <Wordle theme={props.darkMode ? 'dark' : 'light'}/>
+
 
         </Layout>
     )

@@ -2,7 +2,7 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* Prevent scrolling */
+    /*overflow: hidden; !* Prevent scrolling *!*/
 }
 
 @keyframes shake {
@@ -14,7 +14,19 @@ body, html {
 .shake-and-bake {
     animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
+/*.tiles {*/
+/*    flex: 1;*/
+/*    padding: 20px;*/
+/*}*/
 
+.tile {
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    perspective: 1000px;
+    border-radius: 12px;
+    border-width: 1px;
+}
 
 /* Styles for small devices */
 @media (max-width: 600px) {
@@ -23,6 +35,11 @@ body, html {
         font-size: 12px;   /* Smaller font size */
         min-width: 30px;
     }
+
+    .tile {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* Styles for medium devices */
@@ -30,6 +47,41 @@ body, html {
     .key-button {
         padding: 6px 12px; /* Medium padding */
         font-size: 14px;   /* Medium font size */
-        min-width: 40px;
+        min-width: 65px;
+    }
+
+    .tile {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 3px;
     }
 }
+
+/* large devlices */
+@media (min-width: 900px) {
+    .key-button {
+        padding: 6px 18px; /* Medium padding */
+        font-size: 14px;   /* Medium font size */
+        min-width: 70px;
+        min-height: 70px;
+    }
+    .tile {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 5px;
+    }
+}
+/*@media (max-width: 767px) {*/
+/*  .keyboard-wrapper {*/
+/*    position: fixed;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: env(safe-area-inset-bottom);*/
+/*    z-index: 1000;*/
+/*    padding-bottom: env(safe-area-inset-bottom);*/
+/*  }*/
+
+/*  .game-container {*/
+/*    padding-bottom: calc(50px + env(safe-area-inset-bottom));*/
+/*  }*/
+/*}*/

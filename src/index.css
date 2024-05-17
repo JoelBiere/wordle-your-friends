@@ -12,17 +12,4 @@ code {
     monospace;
 }
 
-/*@media (max-width: 767px) {*/
-/*  .keyboard-wrapper {*/
-/*    position: fixed;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    bottom: env(safe-area-inset-bottom);*/
-/*    z-index: 1000;*/
-/*    padding-bottom: env(safe-area-inset-bottom);*/
-/*  }*/
 
-/*  .game-container {*/
-/*    padding-bottom: calc(50px + env(safe-area-inset-bottom));*/
-/*  }*/
-/*}*/

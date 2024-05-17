@@ -57,14 +57,9 @@ const Tile = (props: {
 
     return (
         <div
+            className={'tile'}
             style={{
-                backgroundColor: "transparent",
-                width: "50px",
-                height: "50px",
-                perspective: "1000px",
                 borderColor: token.colorBorder,
-                borderRadius: 12,
-                borderWidth: 1,
                 boxShadow: token.boxShadow,
                 marginTop: token.marginSM
             }}
