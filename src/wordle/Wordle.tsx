@@ -4,6 +4,7 @@ import {getWordOfTheDay, isWordInList} from '../firebase/database'
 import Tile from "./components/tile/Tile";
 import Keyboard from "./components/keyboard/Keyboard";
 import EndOfGameModal from "./components/feedback/EndOfGameModal";
+import styled from "styled-components";
 
 const Wordle = (props: { theme: 'dark' | 'light' }) => {
 
@@ -90,10 +91,10 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
     }, [guesses, answer]);
 
     return (
-        <>
-            <div>
-                {contextHolder}
-                {endOfGame && <EndOfGameModal won={won} guesses={guesses} answer={answer}/>}
+        <Container>
+            {contextHolder}
+            {endOfGame && <EndOfGameModal won={won} guesses={guesses} answer={answer}/>}
+            <div className={"tiles"}>
                 {[...Array(6)].map((_, rowIndex) => (
                     <Row
                         key={rowIndex}
@@ -112,21 +113,33 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
                     </Row>
                 ))}
             </div>
-            <div style={{
-                position: 'fixed',
-                left: 0,
-                right: 0,
-                bottom: 50,
-                zIndex: 1000
-            }}
-            >
+            <KeyboardWrapper>
                 <Keyboard guesses={guesses} answer={answer} theme={props.theme}/>
-            </div>
+            </KeyboardWrapper>
 
-        </>
+        </Container>
 
     )
 }
 
 
 export default Wordle
+
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .tiles {
+        flex: 1;
+        padding: 20px;
+    }
+`;
+
+const KeyboardWrapper = styled.div`
+    position: relative;
+    z-index: 1000;
+`;
