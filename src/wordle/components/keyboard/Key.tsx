@@ -50,9 +50,9 @@ const Key = (props: { letter: string, guesses: string[], answer: string, theme: 
         if (correctPosition) {
             setKeyColor(ResultColor[props.theme].correct); // Green if correct position
         } else if (close) {
-            setKeyColor(ResultColor[props.theme].close); // Yellow if found but not correct position
+            setKeyColor(ResultColor[props.theme].close); // Yellow if answer includes letter but not correct position
         } else if (found) {
-            setKeyColor(ResultColor[props.theme].wrong); // Gray if not found
+            setKeyColor(ResultColor[props.theme].wrong); // Gray if answer does not include
         }
     }
 
