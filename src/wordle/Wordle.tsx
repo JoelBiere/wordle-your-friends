@@ -1,13 +1,14 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {Col, message, Row} from "antd";
+import {Col, message, Row, theme} from "antd";
 import {getWordOfTheDay, isWordInList} from '../firebase/database'
 import Tile from "./components/tile/Tile";
 import Keyboard from "./components/keyboard/Keyboard";
 import EndOfGameModal from "./components/feedback/EndOfGameModal";
 import styled from "styled-components";
 
+const {useToken} = theme
 const Wordle = (props: { theme: 'dark' | 'light' }) => {
-
+    const {token} = useToken()
     const [answer, setAnswer] = useState("")
     const [keysPressed, setKeysPressed] = useState<string[]>([])
     const [guesses, setGuesses] = useState<string[]>([])
@@ -113,7 +114,7 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
                     </Row>
                 ))}
             </TilesContainer>
-            <KeyboardWrapper>
+            <KeyboardWrapper backgroundColor={token.colorBgLayout}>
                 <Keyboard guesses={guesses} answer={answer} theme={props.theme}/>
             </KeyboardWrapper>
 
@@ -129,7 +130,7 @@ export default Wordle
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
     flex-grow: 1;
     justify-content: space-between;
     //background: black
@@ -142,8 +143,10 @@ const TilesContainer = styled.div`
     //background: red
 `;
 
-const KeyboardWrapper = styled.div`
+const KeyboardWrapper = styled.div<{backgroundColor: string}>`
     z-index: 1000;
-    padding: 10px; 
-    //background: white;
+    padding: 10px;
+    position: relative;
+    flex-shrink: 0;
+    background-color: ${props => props.backgroundColor};
 `;

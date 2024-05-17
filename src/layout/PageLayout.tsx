@@ -13,6 +13,7 @@ const PageLayout = (props: { darkMode: boolean, setDarkMode: React.Dispatch<Reac
     return (
         <Layout style={{
             minHeight: "100vh",
+            height:'100vh',
             maxWidth: "100vw",
             minWidth: "100vw",
             margin: 0,
