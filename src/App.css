@@ -1,3 +1,7 @@
+:root {
+    --ant-border-color: initial; /* Initial fallback value */
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -28,12 +32,27 @@ body, html {
     border-width: 1px;
 }
 
+.key-button {
+    flex: 1 1 auto;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 5px;
+    border: 1px solid var(--ant-border-color, gray);
+    padding: 6px 12px;
+    font-size: 14px;
+    max-width: calc(10% - 10px); /* Ensures a maximum of 10 buttons per row */
+
+}
+
 /* Styles for extra small devices */
 @media (max-width: 400px) {
     .key-button {
-        padding: 4px 8px;  /* Smaller padding */
-        font-size: 12px;   /* Smaller font size */
-        min-width: 25px;
+        padding: 4px 8px;
+        font-size: 12px;
+        margin: 2px;
+        max-width: calc(10% - 8px); /* Adjusted for smaller devices */
+
     }
 
     .tile {
@@ -43,11 +62,13 @@ body, html {
 }
 
 /* Styles for small devices */
-@media (min-width: 401px) {
+@media (min-width: 401px) and (max-width: 600px) {
     .key-button {
-        padding: 4px 8px;  /* Smaller padding */
-        font-size: 12px;   /* Smaller font size */
-        min-width: 30px;
+        padding: 4px 8px;
+        font-size: 12px;
+        margin: 3px;
+        max-width: calc(10% - 8px); /* Adjusted for smaller devices */
+
     }
 
     .tile {
@@ -57,11 +78,10 @@ body, html {
 }
 
 /* Styles for medium devices */
-@media (min-width: 601px) {
+@media (min-width: 601px) and (max-width: 899px) {
     .key-button {
-        padding: 6px 12px; /* Medium padding */
-        font-size: 14px;   /* Medium font size */
-        min-width: 65px;
+        padding: 6px 12px;
+        font-size: 14px;
     }
 
     .tile {
@@ -71,31 +91,21 @@ body, html {
     }
 }
 
-/* large devlices */
+/* Styles for large devices */
 @media (min-width: 900px) {
     .key-button {
-        padding: 6px 18px; /* Medium padding */
-        font-size: 14px;   /* Medium font size */
+        padding: 6px 18px;
+        font-size: 14px;
         min-width: 70px;
         min-height: 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
+
     .tile {
         width: 80px;
         height: 80px;
         margin-bottom: 5px;
     }
 }
-/*@media (max-width: 767px) {*/
-/*  .keyboard-wrapper {*/
-/*    position: fixed;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    bottom: env(safe-area-inset-bottom);*/
-/*    z-index: 1000;*/
-/*    padding-bottom: env(safe-area-inset-bottom);*/
-/*  }*/
-
-/*  .game-container {*/
-/*    padding-bottom: calc(50px + env(safe-area-inset-bottom));*/
-/*  }*/
-/*}*/

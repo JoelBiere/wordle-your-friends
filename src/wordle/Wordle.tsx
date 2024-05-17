@@ -95,7 +95,7 @@ const Wordle = (props: { theme: 'dark' | 'light' }) => {
         <Container>
             {contextHolder}
             {endOfGame && <EndOfGameModal won={won} guesses={guesses} answer={answer}/>}
-            <TilesContainer>
+            <TilesContainer backgroundColor={token.colorBgLayout}>
                 {[...Array(6)].map((_, rowIndex) => (
                     <Row
                         key={rowIndex}
@@ -130,16 +130,16 @@ export default Wordle
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
     flex-grow: 1;
     justify-content: space-between;
     //background: black
 `;
 
-const TilesContainer = styled.div`
+const TilesContainer =  styled.div<{backgroundColor: string}>`
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    background-color: ${props => props.backgroundColor};
     //background: red
 `;
 
@@ -152,4 +152,8 @@ const KeyboardWrapper = styled.div<{backgroundColor: string}>`
     right: 0;
     flex-shrink: 0;
     background-color: ${props => props.backgroundColor};
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
 `;
