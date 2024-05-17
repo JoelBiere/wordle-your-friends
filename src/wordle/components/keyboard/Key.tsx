@@ -60,11 +60,11 @@ const Key = (props: { letter: string, guesses: string[], answer: string, theme: 
     }, [guesses, answer, letter, props.theme]);
 
     return (
-        <Col className="key-button" style={{backgroundColor: keyColor ? keyColor : token.colorBgContainer}}
+        <button className="key-button" style={{backgroundColor: keyColor ? keyColor : token.colorBgContainer}}
              onClick={() => simulateKeydown()} key={props.letter}>
             <Typography.Text>{renderLetter(letter)}</Typography.Text>
 
-        </Col>
+        </button>
 
     )
 }
