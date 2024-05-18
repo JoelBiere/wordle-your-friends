@@ -41,7 +41,6 @@ const KeyboardRow = (props: { children: any }) => (
 const RowContainer = styled(Row)`
     display: flex;
     justify-content: center;
-    margin-top: 8px;
     flex-wrap: nowrap;
     width: 100%;
 `;

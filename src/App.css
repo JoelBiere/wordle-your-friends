@@ -1,6 +1,6 @@
 :root {
     --ant-border-color: initial; /* Initial fallback value */
-    --fluid-font-size: calc(12px + 0.5vw); /* Example fluid font size calculation */
+    --fluid-font-size: calc(12px + 1vw); /* Example fluid font size calculation */
 }
 
 body, html {
@@ -19,6 +19,10 @@ body, html {
 .shake-and-bake {
     animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
+/*.tiles {*/
+/*    flex: 1;*/
+/*    padding: 20px;*/
+/*}*/
 
 .tile {
     background-color: transparent;
@@ -34,10 +38,11 @@ body, html {
     text-align: center;
     cursor: pointer;
     border-radius: 8px;
-    margin: 5px;
+    margin: 2px 1px 2px 1px;
     border: 1px solid var(--ant-border-color, gray);
     padding: 6px 12px;
     font-size: var(--fluid-font-size);
+    min-width: 9vw;
     max-width: calc(10% - 10px); /* Ensures a maximum of 10 buttons per row */
     display: flex;
     justify-content: center;
@@ -49,7 +54,6 @@ body, html {
 @media (max-width: 400px) {
     .key-button {
         padding: 4px 8px;
-        margin: 2px;
         max-width: calc(10% - 8px); /* Adjusted for smaller devices */
 
     }
@@ -64,7 +68,6 @@ body, html {
 @media (min-width: 401px) and (max-width: 600px) {
     .key-button {
         padding: 4px 8px;
-        margin: 3px;
         max-width: calc(10% - 8px); /* Adjusted for smaller devices */
 
     }
@@ -79,6 +82,7 @@ body, html {
 @media (min-width: 601px) and (max-width: 899px) {
     .key-button {
         padding: 6px 12px;
+        margin:3px
     }
 
     .tile {
@@ -92,6 +96,7 @@ body, html {
 @media (min-width: 900px) {
     .key-button {
         padding: 6px 18px;
+        margin: 4px;
         min-width: 70px;
         max-width: 70px;
         min-height: 70px;
