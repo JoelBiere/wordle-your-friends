@@ -2,7 +2,7 @@ import {doc, getDoc} from "firebase/firestore";
 
 import dayjs from "dayjs";
 import  {db} from "./config";
-
+// ran out of words - so create mechanism to get more words after the last date in db
 const getRandomWordFromDateRange = () => {
     const start = dayjs("2024-04-08");
     const end = dayjs("2024-08-07");
