@@ -3,20 +3,40 @@ import {doc, getDoc} from "firebase/firestore";
 import dayjs from "dayjs";
 import  {db} from "./config";
 
-export const getWordOfTheDay = async () => {
+const getRandomWordFromDateRange = () => {
+    const start = dayjs("2024-04-08");
+    const end = dayjs("2024-08-07");
 
-    const docRef = doc(db, "words", dayjs().format("YYYY-MM-DD"));
-    const docSnap = await getDoc(docRef);
-    console.log('This is docRef', docRef)
+    const diffInDays = end.diff(start, 'day');
+    const randomDays = Math.floor(Math.random() * (diffInDays + 1));
+    const result = start.add(randomDays, 'day');
+
+    return result.format("YYYY-MM-DD");
+};
+
+export const getWordOfTheDay = async () => {
+    const today = dayjs().format("YYYY-MM-DD");
+    let docRef = doc(db, "words", today);
+    let docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
-        return docSnap.data()
+        return docSnap.data();
     } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
+        console.log("No word for today, using a random date from the range");
+        const randomDate = getRandomWordFromDateRange();
+        docRef = doc(db, "words", randomDate);
+        docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("Random word found:", docSnap.data());
+            return docSnap.data();
+        } else {
+            console.log("No word found even with random date. Check your database.");
+            return null;
+        }
     }
-}
+};
 
 
 export const isWordInList = async (guess: string) => {
