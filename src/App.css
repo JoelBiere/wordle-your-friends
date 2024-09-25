@@ -1,5 +1,6 @@
 :root {
     --ant-border-color: initial; /* Initial fallback value */
+    --fluid-font-size: calc(12px + 1vw); /* Example fluid font size calculation */
 }
 
 body, html {
@@ -37,11 +38,16 @@ body, html {
     text-align: center;
     cursor: pointer;
     border-radius: 8px;
-    margin: 5px;
+    margin: 2px 1px 2px 1px;
     border: 1px solid var(--ant-border-color, gray);
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: var(--fluid-font-size);
+    min-width: 9vw;
     max-width: calc(10% - 10px); /* Ensures a maximum of 10 buttons per row */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: lightgray;
 
 }
 
@@ -49,8 +55,6 @@ body, html {
 @media (max-width: 400px) {
     .key-button {
         padding: 4px 8px;
-        font-size: 12px;
-        margin: 2px;
         max-width: calc(10% - 8px); /* Adjusted for smaller devices */
 
     }
@@ -65,8 +69,6 @@ body, html {
 @media (min-width: 401px) and (max-width: 600px) {
     .key-button {
         padding: 4px 8px;
-        font-size: 12px;
-        margin: 3px;
         max-width: calc(10% - 8px); /* Adjusted for smaller devices */
 
     }
@@ -81,7 +83,7 @@ body, html {
 @media (min-width: 601px) and (max-width: 899px) {
     .key-button {
         padding: 6px 12px;
-        font-size: 14px;
+        margin:3px
     }
 
     .tile {
@@ -95,9 +97,11 @@ body, html {
 @media (min-width: 900px) {
     .key-button {
         padding: 6px 18px;
-        font-size: 14px;
+        margin: 4px;
         min-width: 70px;
+        max-width: 70px;
         min-height: 70px;
+        max-height: 70px;
         display: flex;
         flex-direction: column;
         justify-content: center;

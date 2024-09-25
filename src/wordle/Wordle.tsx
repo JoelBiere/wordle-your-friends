@@ -140,6 +140,7 @@ const TilesContainer =  styled.div<{backgroundColor: string}>`
     padding: 20px;
     overflow-y: auto;
     background-color: ${props => props.backgroundColor};
+    margin-bottom: 155px; /* Adjust this value based on the height of KeyboardWrapper */
     //background: red
 `;
 
@@ -156,4 +157,5 @@ const KeyboardWrapper = styled.div<{backgroundColor: string}>`
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
+    min-height: 155px; /* Fixed height */
 `;
