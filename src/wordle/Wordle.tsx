@@ -140,6 +140,7 @@ const TilesContainer =  styled.div<{backgroundColor: string}>`
     padding: 20px;
     overflow-y: auto;
     background-color: ${props => props.backgroundColor};
+    padding-bottom: 175px; /* Adjust this value based on the height of KeyboardWrapper */
     margin-bottom: 155px; /* Adjust this value based on the height of KeyboardWrapper */
     //background: red
 `;
