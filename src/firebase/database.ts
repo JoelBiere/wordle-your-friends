@@ -4,14 +4,15 @@ import dayjs from "dayjs";
 import  {db} from "./config";
 // ran out of words - so create mechanism to get more words after the last date in db
 const getRandomWordFromDateRange = () => {
-    const start = dayjs("2024-04-08");
-    const end = dayjs("2024-08-07");
+    // const start = dayjs("2024-04-08");
+    // const end = dayjs("2024-08-07");
+    const todayDayNum = dayjs().date()
 
-    const diffInDays = end.diff(start, 'day');
-    const randomDays = Math.floor(Math.random() * (diffInDays + 1));
-    const result = start.add(randomDays, 'day');
+    // const diffInDays = end.diff(start, 'day');
+    // const randomDays = Math.floor(Math.random() * (diffInDays + 1));
+    // const result = start.add(randomDays, 'day');
 
-    return result.format("YYYY-MM-DD");
+    return `2024-05-${todayDayNum}`
 };
 
 export const getWordOfTheDay = async () => {
