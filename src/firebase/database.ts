@@ -11,8 +11,8 @@ const getRandomWordFromDateRange = () => {
     // const diffInDays = end.diff(start, 'day');
     // const randomDays = Math.floor(Math.random() * (diffInDays + 1));
     // const result = start.add(randomDays, 'day');
-
-    return `2024-05-${todayDayNum}`
+    const len = todayDayNum.toString().length;
+    return `2024-05-${len === 1 ? "0"+todayDayNum: todayDayNum}`
 };
 
 export const getWordOfTheDay = async () => {
